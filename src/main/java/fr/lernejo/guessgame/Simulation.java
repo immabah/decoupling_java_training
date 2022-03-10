@@ -7,37 +7,44 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Simulation {
-    private final Logger logger = LoggerFactory.getLogger("simulation");
+
+    private final Logger logger = LoggerFactory.getLogger("Simulation");
     private final Player player;
-    private long nbrgt;
+    private long numberToGuess;
 
     public Simulation(Player player) {
-        this.player = player;
+        this.player=player;
     }
 
-    public void initialize(long nbrtgt) {
-        this.nbrgt = nbrtgt;
+    public void initialize(long numberToGuess) {
+        this.numberToGuess = numberToGuess;
     }
 
+    /**
+     * @return true if the player have guessed the right number
+     */
     private boolean nextRound() {
-        long nbr = player.askNextGuess();
-        if (nbr == nbrgt) {
+        //System.out.println(" Entrez un nombre ");
+        long guess = player.askNextGuess();
+        if (guess == numberToGuess) {
+
             return true;
         }
-        if (nbr > nbrgt) {
-            logger.log(" Plus petit \n");
+        if (guess > numberToGuess) {
+            logger.log("Le nombre est plus petit\n");
             player.respond(false);
         }else{
-            logger.log(" Plus grand  \n");
+            logger.log("Le nombre est plus grand \n");
             player.respond(true);
         }
+
         return false;
     }
 
-    public void loopUntilPlayerSucceed(long maxLoops) {
+    public void loopUntilPlayerSucceed(long maximumLoops) {
         boolean win = false;
         long start = System.currentTimeMillis();
-        for (int i = 0; i < maxLoops; i++) {
+        for (int i = 0; i < maximumLoops; i++) {
             if (nextRound()) {
                 win = true;
                 break;
@@ -50,6 +57,6 @@ public class Simulation {
         }else{
             logger.log(" Vous avez perdu \n");
         }
-        logger.log("Temps total : "  + new SimpleDateFormat("mm:ss:SSS").format(new Date(time)));
+        logger.log(" Temps total : "  + new SimpleDateFormat("mm:ss:SSS").format(new Date(time)));
     }
 }
