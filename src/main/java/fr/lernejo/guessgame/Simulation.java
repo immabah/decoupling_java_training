@@ -8,8 +8,8 @@ import java.util.Date;
 
 public class Simulation {
     private final Logger logger = LoggerFactory.getLogger("simulation");
-    private final Player player;  //TODO add variable type
-    private long numberToGuess; //TODO add variable type
+    private final Player player;
+    private long numberToGuess;
 
     public Simulation(Player player) {
         this.player = player;
