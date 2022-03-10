@@ -9,22 +9,22 @@ import java.util.Date;
 public class Simulation {
     private final Logger logger = LoggerFactory.getLogger("simulation");
     private final Player player;
-    private long nbr;
+    private long nbrgt;
 
     public Simulation(Player player) {
         this.player = player;
     }
 
-    public void initialize(long numberToGuess) {
-        this.nbr = numberToGuess;
+    public void initialize(long nbrtgt) {
+        this.nbrgt = nbrtgt;
     }
 
     private boolean nextRound() {
         long nbr = player.askNextGuess();
-        if (nbr == nbr) {
+        if (nbr == nbrgt) {
             return true;
         }
-        if (nbr > nbr) {
+        if (nbr > nbrgt) {
             logger.log(" Plus petit \n");
             player.respond(false);
         }else{
